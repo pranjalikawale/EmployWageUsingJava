@@ -1,6 +1,6 @@
 import java.lang.*;
 
-public class EmployWageUC4
+public class EmployWageComputation
 {
    public static void main(String args[])
    {
