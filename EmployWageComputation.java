@@ -9,13 +9,15 @@ public class EmployWageComputation
       final int IS_PART_TIME=2;
       final int EMP_RATE_HRS=20;
       final int WORKING_DAY=20;
+      final int WORKING_HOURS=100;
       //variable
       int empHrs=0;
       int empWage=0;
       int attendence;
-      int salary=0;
+      int totalWorkingDay=0;
+      int totalWorkingHrs=0;
       //find empHr
-      for(int i=1;i<=20;i++)
+      while(totalWorkingHrs<WORKING_HOURS && totalWorkingDay<WORKING_DAY)
       {
          attendence=(int)(Math.random()*10)%3;
          switch(attendence)
@@ -30,11 +32,11 @@ public class EmployWageComputation
                empHrs=0;
                break;
          }
-         salary+=empHrs*EMP_RATE_HRS;
+         totalWorkingHrs=totalWorkingHrs+empHrs;
+         totalWorkingDay++;
       }
-
       //calculate empwage
-      System.out.println("Employ Wage for month : "+salary);
+      System.out.println("Employ Wage for month : "+(totalWorkingHrs*EMP_RATE_HRS));
 
    }
 }
