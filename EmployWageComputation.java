@@ -1,6 +1,6 @@
 import java.lang.*;
 
-public class EmployWageUC3
+public class EmployWageUC4
 {
    public static void main(String args[])
    {
@@ -11,14 +11,20 @@ public class EmployWageUC3
       //variable
       int empHrs=0;
       int empWage=0;
-      double attendence=Math.floor(Math.random()*10)%3;
+      int attendence=(int)(Math.random()*10)%3;
       //find empHr
-      if(attendence == IS_FULL_TIME)
-         empHrs=8;
-      else if(attendence == IS_PART_TIME)
-         empHrs=4;
-      else
-         empHrs=0;
+      switch(attendence)
+      {
+         case IS_FULL_TIME:
+            empHrs=8;
+            break;
+         case IS_PART_TIME:
+            empHrs=4;
+            break;
+         default:
+            empHrs=0;
+            break;
+      }
       //calculate empwage
       System.out.println("Employ Wage:"+(empHrs*EMP_RATE_HRS));
    }
