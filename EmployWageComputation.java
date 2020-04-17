@@ -66,7 +66,7 @@ public class EmployWageComputation
          System.out.println("Day "+(i+1)+" : "+empDailyWage[i]);
       }
       //calculate empwage
-      System.out.println("Employ Wage for month : "+(totalWorkingHrs*EMP_RATE_HRS));
+      System.out.println("Employ Wage for month : "+employ.getDailyWage(totalWorkingHrs));
    }
 }
 
