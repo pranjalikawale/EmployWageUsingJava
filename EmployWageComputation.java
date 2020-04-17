@@ -8,14 +8,17 @@ public class EmployWageComputation
 	
 	//class variables
 	int empRate, numberOfDays, numberOfHrs;
+	String company;
 
 	//constructor
-	public EmployWageComputation(int rate,int days,int hrs)
+	public EmployWageComputation(String companyName,int rate,int days,int hrs)
 	{
+		this.company=companyName;
 		this.empRate=rate;
 		this.numberOfDays=days;
 		this.numberOfHrs=hrs;
 	}
+
    //return empHrs
    public int getHour()
    {
@@ -53,19 +56,21 @@ public class EmployWageComputation
       {
 			hours=getHour();
          totalWorkingHrs=totalWorkingHrs+hours;
-			System.out.println("Employ Wage for day "+(++totalWorkingDay)+" : "+getDailyWage(hours));
+			System.out.println(company+" Employ Wage for day "+(++totalWorkingDay)+" : "+getDailyWage(hours));
       }
 
 		//calculate empwage
-      System.out.println("Employ Wage for month : "+getDailyWage(totalWorkingHrs));
-
+      System.out.println(company+" Total Employ Wage for month : "+getDailyWage(totalWorkingHrs));
+		System.out.println();
 	}
 
 	//main method
    public static void main(String args[])
    {  //create instance
-      EmployWageComputation employ= new EmployWageComputation(20,20,100);
-		employ.computeEmployWage();
+      EmployWageComputation jio= new EmployWageComputation("Relance jio",20,20,100);
+		EmployWageComputation tcs= new EmployWageComputation("TCS",15,15,100);
+		jio.computeEmployWage();
+		tcs.computeEmployWage();
    }
 }
 
