@@ -5,13 +5,21 @@ public class EmployWageComputation
    //constant
    final static int IS_FULL_TIME=1;
    final static int IS_PART_TIME=2;
-   final static int EMP_RATE_HRS=20;
-   final static int WORKING_DAY=20;
-   final static int WORKING_HOURS=100;
+	
+	//class variables
+	int empRate, numberOfDays, numberOfHrs;
 
+	//constructor
+	public EmployWageComputation(int rate,int days,int hrs)
+	{
+		this.empRate=rate;
+		this.numberOfDays=days;
+		this.numberOfHrs=hrs;
+	}
    //return empHrs
-   public int getHour(int attendence)
+   public int getHour()
    {
+		int attendence=(int)(Math.random()*10)%3;
       int empHrs=0;
 
       switch(attendence)
@@ -32,41 +40,32 @@ public class EmployWageComputation
    //return daily empWage
    public int getDailyWage(int hrs)
    {
-      return (hrs*EMP_RATE_HRS);
+      return (hrs*empRate);
    }
 
-
-   public static void main(String args[])
-   {
-      //create instance
-      EmployWageComputation employ= new EmployWageComputation();
-
-      //variable
-      int empHrs=0;
-      int empWage=0;
-      int empAttendence;
-      int totalWorkingDay=0;
-      int totalWorkingHrs=0;
-      int size=25;
-      int empDailyWage[]=new int[size];
-      int hours;
-
+	//compute employ wage
+	public void computeEmployWage()
+	{
+		int totalWorkingDay=0, totalWorkingHrs=0 , hours;
       //find totalWorkingHrs
-      while(totalWorkingHrs<WORKING_HOURS && totalWorkingDay<WORKING_DAY)
+
+		while(totalWorkingHrs<numberOfHrs && totalWorkingDay<numberOfDays)
       {
-         empAttendence=(int)(Math.random()*10)%3;
-         hours=employ.getHour(empAttendence);
+			hours=getHour();
          totalWorkingHrs=totalWorkingHrs+hours;
-         empDailyWage[totalWorkingDay++]=employ.getDailyWage(hours);
+			System.out.println("Employ Wage for day "+(++totalWorkingDay)+" : "+getDailyWage(hours));
       }
 
-      //calculate wages for per day
-      for(int i=0;i<empDailyWage.length;i++)
-      {
-         System.out.println("Day "+(i+1)+" : "+empDailyWage[i]);
-      }
-      //calculate empwage
-      System.out.println("Employ Wage for month : "+employ.getDailyWage(totalWorkingHrs));
+		//calculate empwage
+      System.out.println("Employ Wage for month : "+getDailyWage(totalWorkingHrs));
+
+	}
+
+	//main method
+   public static void main(String args[])
+   {  //create instance
+      EmployWageComputation employ= new EmployWageComputation(20,20,100);
+		employ.computeEmployWage();
    }
 }
 
