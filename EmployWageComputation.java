@@ -1,4 +1,5 @@
 import java.lang.*;
+import java.util.*;
 
 public class EmployWageComputation
 {
@@ -37,9 +38,9 @@ public class EmployWageComputation
    }
 
 	//compute employ wage
-	public void computeEmployWage(CompanyEmpWage[] companies)
+	public void computeEmployWage(ArrayList <CompanyEmpWage> companiesArrayList)
 	{
-		for(CompanyEmpWage company:companies)
+		for(CompanyEmpWage company:companiesArrayList)
 		{
 			int totalWorkingDay=0, totalWorkingHrs=0 , hours, employRate;
 			employRate=company.getEmpRate();
