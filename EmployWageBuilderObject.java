@@ -19,6 +19,6 @@ public class EmployWageBuilderObject
 		System.out.println("Enter the Company name:");
 		Scanner sc=new Scanner(System.in);
 		String name=sc.nextLine();
-		System.out.println("Total wages for "+name+" : "totalWagesByComp(name));
+		System.out.println("Total wages for "+name+" : "+employee.totalWagesByComp(name));
    }
 }
