@@ -7,17 +7,7 @@ public class EmployWageComputation
    final static int IS_PART_TIME=2;
 	
 	//class variables
-	public int empRate, numberOfDays, numberOfHrs, totalWages;
-	public String company;
-
-	//constructor
-	public EmployWageComputation(String companyName,int rate,int days,int hrs)
-	{
-		this.company=companyName;
-		this.empRate=rate;
-		this.numberOfDays=days;
-		this.numberOfHrs=hrs;
-	}
+	public int totalWages;
 
    //return empHrs
    public int getHour()
@@ -41,31 +31,31 @@ public class EmployWageComputation
    }
 
    //return daily empWage
-   public int getDailyWage(int hrs)
+   public int getDailyWage(int hrs,int rate)
    {
-      return (hrs*empRate);
+      return (hrs*rate);
    }
 
 	//compute employ wage
-	public void computeEmployWage()
+	public void computeEmployWage(CompanyEmpWage[] companies)
 	{
-		int totalWorkingDay=0, totalWorkingHrs=0 , hours;
+		for(CompanyEmpWage company:companies)
+		{
+			int totalWorkingDay=0, totalWorkingHrs=0 , hours, employRate;
+			employRate=company.getEmpRate();
 
-		//find totalWorkingHrs
-		while(totalWorkingHrs<numberOfHrs && totalWorkingDay<numberOfDays)
-      {
-			hours=getHour();
-         totalWorkingHrs=totalWorkingHrs+hours;
-			System.out.println(company+" Employ Wage for day "+(++totalWorkingDay)+" : "+getDailyWage(hours));
-      }
+			//find totalWorkingHrs
+			while(totalWorkingHrs<company.getWorkingHrs() && totalWorkingDay<company.getWorkingDays())
+      	{
+				hours=getHour();
+         	totalWorkingHrs=totalWorkingHrs+hours;
+				System.out.println(company.getCompanyName()+" Employ Wage for day "+(++totalWorkingDay)+" : "+getDailyWage(hours,employRate));
+      	}
 		//calculate total wage
-		totalWages=getDailyWage(totalWorkingHrs);
+		totalWages=getDailyWage(totalWorkingHrs,employRate);
+		System.out.println(company.getCompanyName()+" Total Employ Wage for month : "+ totalWages);
 		System.out.println();
 	}
-	
-	public void totalEmployWage()
-	{
-		System.out.println(company+" Total Employ Wage for month : "+ totalWages);
-	}
-}
 
+}
+}
