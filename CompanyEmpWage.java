@@ -16,27 +16,26 @@ public class CompanyEmpWage
 	}
 
 	//return companyName
-   public String getCompanyName()
-   {
-      return companyName;
-   }
+	public String getCompanyName()
+	{
+		return companyName;
+	}
 
 	//return empRate
 	public int getEmpRate()
 	{
 		return empRate;
 	} 
-	
+
 	//return workingDays
-   public int getWorkingDays()
-   {
-      return workingDays;
-   }
+	public int getWorkingDays()
+	{
+		return workingDays;
+	}
 
 	//return workinghrs
-   public int getWorkingHrs()
-   {
-      return workingHrs;
-   }
-
+	public int getWorkingHrs()
+	{
+		return workingHrs;
+	}
 }
