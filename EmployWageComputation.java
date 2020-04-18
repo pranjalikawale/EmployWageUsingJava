@@ -6,14 +6,13 @@ public class EmployWageComputation
    //constant
    final static int IS_FULL_TIME=1;
    final static int IS_PART_TIME=2;
-	
-	//class variables
-	public int totalWages;
-
-   //return empHrs
+   //Declarethe Map to store company and its Wages[daily & total]
+    Map <String,CompanyWagesClass> CompanyandWaagesMap=new HashMap<String,CompanyWagesClass>();
+ 
+  //return empHrs
    public int getHour()
    {
-		int attendence=(int)(Math.random()*10)%3;
+      int attendence=(int)(Math.random()*10)%3;
       int empHrs=0;
 
       switch(attendence)
@@ -37,26 +36,53 @@ public class EmployWageComputation
       return (hrs*rate);
    }
 
-	//compute employ wage
-	public void computeEmployWage(ArrayList <CompanyEmpWage> companiesArrayList)
-	{
-		for(CompanyEmpWage company:companiesArrayList)
-		{
-			int totalWorkingDay=0, totalWorkingHrs=0 , hours, employRate;
-			employRate=company.getEmpRate();
+   //compute employ wage
+   public void computeEmployWage(ArrayList<CompanyEmpWage> companyDetailsList)    
+   {
+	//Iterate through all the companies and compute daily and TotalWages
+      for(CompanyEmpWage company : companyDetailsList)
+      {
+         int totalWorkingDay=0, totalWorkingHrs=0 , hours, employRate;
+			
+			CompanyWagesClass compWages=new CompanyWagesClass();//For Each Company it get declared
+         employRate=company.getEmpRate();
 
-			//find totalWorkingHrs
-			while(totalWorkingHrs<company.getWorkingHrs() && totalWorkingDay<company.getWorkingDays())
-      	{
-				hours=getHour();
-         	totalWorkingHrs=totalWorkingHrs+hours;
-				System.out.println(company.getCompanyName()+" Employ Wage for day "+(++totalWorkingDay)+" : "+getDailyWage(hours,employRate));
-      	}
-		//calculate total wage
-		totalWages=getDailyWage(totalWorkingHrs,employRate);
-		System.out.println(company.getCompanyName()+" Total Employ Wage for month : "+ totalWages);
-		System.out.println();
+         //Compute daily wages for company and store in CompanyWagesClass object
+         while(totalWorkingHrs<company.getWorkingHrs() && totalWorkingDay<company.getWorkingDays())
+         {
+            hours=getHour();
+            totalWorkingHrs=totalWorkingHrs+hours;
+	     		compWages.dailwageArrayList.add(getDailyWage(hours,employRate));
+         }
+
+         //calculate total wage for the compan and store in CompanyWagesClass object
+			compWages.totalWages=getDailyWage(totalWorkingHrs,employRate);
+
+			//Finally store company name and it respective Wages in Map.
+			CompanyandWaagesMap.put(company.getCompanyName(),compWages);
+     	 }
+		 displayWages();
+    }
+
+	//Display Comany Wages
+	public void displayWages()
+	{
+		for(Map.Entry<String,CompanyWagesClass> cmp : CompanyandWaagesMap.entrySet())
+		{
+			System.out.println("Company :"+cmp.getKey() +" \nCompany Daily Wages :"+cmp.getValue().dailwageArrayList +"\n Company Total Wages : "+cmp.getValue().totalWages);
+		}
 	}
 
+	//make class for wages
+	private class CompanyWagesClass
+	{
+   	private int totalWages;
+   	private ArrayList<Integer> dailwageArrayList = new ArrayList<Integer>();
+	}
 }
-}
+
+
+
+
+
+
